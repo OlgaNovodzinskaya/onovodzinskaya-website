@@ -1,6 +1,11 @@
+import AppLayout from "@web/layouts/AppLayout";
 import "@web/styles/globals.css";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <AppLayout>
+      <Component {...pageProps} />
+    </AppLayout>
+  );
 }
