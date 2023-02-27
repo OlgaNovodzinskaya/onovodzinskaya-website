@@ -16,7 +16,7 @@ const Navbar = () => {
     <Disclosure as="nav" className="bg-transparent">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-[1200px] px-4">
+          <div className="mx-auto px-4 z-10 absolute w-full">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -51,8 +51,8 @@ const Navbar = () => {
                         className={classNames(
                           item.current
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
+                            : "text-[#757575] hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-[16px] leading-5 font-medium font-[Arsenal]"
                         )}
                         aria-current={item.current ? "page" : undefined}
                       >
