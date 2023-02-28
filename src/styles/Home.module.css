@@ -1,10 +1,8 @@
 .container {
-  max-width: 1500px;
   margin: 0 auto;
 }
 
 .object_card {
-  max-width: 237px;
   width: 100%;
   margin: 0 auto;
   height: 316px;

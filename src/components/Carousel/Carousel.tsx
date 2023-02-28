@@ -1,113 +1,83 @@
-import React, { useState } from "react";
+import { getAllFlats } from "@web/services/supabase";
+import classNames from "classnames/bind";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import Image from "next/image";
+import { useState } from "react";
+import useSWR from "swr";
+import ObjectCard from "../Objects/ObjectCard";
+import styles from "./Carousel.module.scss";
 
-type Props = {
-  perView: number;
-  children: React.ReactNode;
-};
+const cn = classNames.bind(styles);
 
-type BreakpointConfig = {
-  [breakpoint: string]: {
-    slidesPerView: number;
-    spacing: number;
-  };
-};
-
-const Carousel: React.FC<Props> = ({ perView, children }) => {
+export default function Carousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [sliderRef, slider] = useKeenSlider<
-    HTMLDivElement,
-    {
-      slides: {
-        perView: number;
-        spacing: number;
-      };
-      slideChanged?: (slider: any) => void;
-      breakpoints?: BreakpointConfig;
-    }
-  >({
-    initial: 0,
-    slides: {
-      perView: perView,
-      spacing: 0,
-    },
+  const [loaded, setLoaded] = useState(false);
 
+  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
+    slides: {
+      perView: 1,
+      spacing: 15,
+    },
     breakpoints: {
-      "(min-width: 320px)": {
-        slides: {
-          perView: 1,
-          spacing: 0,
-        },
-      },
-      "(min-width: 600px)": {
+      "(min-width: 768px)": {
         slides: {
           perView: 2,
-          spacing: 0,
+          spacing: 15,
         },
       },
-      "(min-width: 834px)": {
+      "(min-width: 1024px)": {
         slides: {
           perView: 3,
-          spacing: 0,
+          spacing: 15,
         },
       },
-      "(min-width: 1200px)": {
+
+      "(min-width: 1280px)": {
         slides: {
           perView: 4,
-          spacing: 0,
+          spacing: 15,
         },
       },
-      "(min-width: 1500px)": {
-        slides: {
-          perView: 5,
-          spacing: 0,
-        },
-      },
+    },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel);
+    },
+    created() {
+      setLoaded(true);
     },
   });
 
-  console.log(slider);
+  const { data, error, isLoading } = useSWR("/api/flats", getAllFlats);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
-    <>
-      <div className="container relative flex items-center">
-        <div ref={sliderRef} className="keen-slider">
-          {children}
-        </div>
-        {slider && (
-          <div className="carousel-navigation">
-            <button
-              onClick={() => slider.current?.prev()}
-              className="arrow arrow-left absolute left-0"
-            >
-              <Image
-                src="/images/left.svg"
-                alt="Picture of the author"
-                width={18}
-                height={57}
-                className="object-contain"
-              />
-            </button>
-            <button
-              onClick={() => slider.current?.next()}
-              className="arrow arrow-right absolute right-0"
-            >
-              <Image
-                src="/images/right.svg"
-                alt="Picture of the author"
-                width={18}
-                height={57}
-                className="object-contain"
-              />
-            </button>
+    <div className="container">
+      {/* <div ref={ref} className={cn("keen-slider slider_container")}>
+        {data?.map((item) => {
+          return <ObjectCard key={item.id} {...item} />;
+        })}
+      </div> */}
+
+      <div className="mt-4">
+        {loaded && instanceRef.current && (
+          <div className={cn("dots")}>
+            {new Array(2).fill(5).map((_, idx) => {
+              return (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    instanceRef.current?.moveToIdx(idx);
+                  }}
+                  className={cn("dot", {
+                    "dot--active": currentSlide === idx,
+                  })}
+                ></button>
+              );
+            })}
           </div>
         )}
       </div>
-      <div className="dots"></div>
-    </>
+    </div>
   );
-};
-
-export default Carousel;
+}

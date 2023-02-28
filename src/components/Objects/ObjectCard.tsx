@@ -1,20 +1,30 @@
-import React from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import styles from "@web/styles/Home.module.css";
 import classNames from "classnames/bind";
 
 const cn = classNames.bind(styles);
 
-const ObjectCard = () => {
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+type Props = {
+  key: number;
+  city: string;
+  images: string;
+};
+const ObjectCard: FC<Props> = ({ city, images }) => {
+  const imageList = images.split(",");
+
   return (
-    <>
+    <div className="keen-slider__slide">
       <div className={cn("object_card")}>
         <Image
-          src="/images/object.png"
+          src={`${SUPABASE_URL}/storage/v1/object/public/${imageList[0]}`}
           alt="Picture of the author"
           fill
           className="object-cover"
         />
+
         <div className={cn("object_content")}>
           <div className="flex justify-center gap-[10px] items-center">
             <span className="font-[Arsenal] font-bold text-[20px] leading-[25px] text-white">
@@ -51,7 +61,7 @@ const ObjectCard = () => {
           Подробнее
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
