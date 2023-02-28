@@ -1,5 +1,7 @@
 import React from "react";
 import ObjectCard from "@web/components/Objects/ObjectCard";
+import Carousel from "@web/components/Carousel/Carousel";
+import object from "@web/utils/objects";
 
 const Objects = () => {
   return (
@@ -9,11 +11,13 @@ const Objects = () => {
           Объекты
         </h2>
         <div className="flex justify-between mt-[66px]">
-          <ObjectCard />
-          <ObjectCard />
-          <ObjectCard />
-          <ObjectCard />
-          <ObjectCard />
+          <Carousel perView={5}>
+            {object.map((item, index) => (
+              <div key={index} className={`keen-slider__slide`}>
+                <ObjectCard />
+              </div>
+            ))}
+          </Carousel>
         </div>
       </div>
     </>

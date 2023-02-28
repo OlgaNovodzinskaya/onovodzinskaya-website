@@ -1,4 +1,3 @@
-import Carousel from "@web/components/Carousel/Carousel";
 import Footer from "@web/components/Footer/Footer";
 import styles from "@web/styles/Home.module.css";
 import classNames from "classnames/bind";
@@ -36,7 +35,6 @@ const Home: NextPage = () => {
         <div className="bg-[#fdf8ff]">
           <div className={cn("container")}>
             <Header />
-            {/* <Carousel /> */}
           </div>
         </div>
         <div className="py-[100px] bg-gradient-to-b from-[#FFF5F3] to-[#fff5f3]">

@@ -6,6 +6,7 @@
 .object_card {
   max-width: 237px;
   width: 100%;
+  margin: 0 auto;
   height: 316px;
   border-radius: 10px;
   border: 3px solid transparent;
