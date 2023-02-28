@@ -1,0 +1,24 @@
+.dots {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.dot {
+  border: none;
+  width: 60px;
+  height: 10px;
+  background: #c5c5c5;
+  border-radius: 12px;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+
+  &--active {
+    background: #000;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
