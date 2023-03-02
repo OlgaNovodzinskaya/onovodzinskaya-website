@@ -1,0 +1,51 @@
+.dots {
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.dot {
+  border: none;
+  width: 53px;
+  height: 8px;
+  background: #ffb8ad;
+  border-radius: 7px;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+
+  &--active {
+    background: #ff8d7d;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .dots {
+    display: flex;
+    padding: 10px 0;
+    justify-content: center;
+  }
+
+  .dot {
+    border: none;
+    width: 116px;
+    height: 14px;
+    background: #ffb8ad;
+    border-radius: 7px;
+    margin: 0 5px;
+    padding: 5px;
+    cursor: pointer;
+
+    &--active {
+      background: #ff8d7d;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

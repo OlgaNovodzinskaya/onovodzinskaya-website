@@ -1,93 +1,58 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "classnames";
-import { Fragment } from "react";
+import Image from "next/image";
+import { useState } from "react";
 
 const navigation = [
-  { name: "Недвижимость", href: "#", current: true },
-  { name: "Обо мне", href: "#", current: false },
-  { name: "Услуги", href: "#", current: false },
-  { name: "Партнеры", href: "#", current: false },
-  { name: "Контакты", href: "#", current: false },
+  { name: "Недвижимость", href: "/", current: true },
+  { name: "Обо мне", href: "/about", current: false },
+  { name: "Услуги", href: "/services", current: false },
+  { name: "Партнеры", href: "/partners", current: false },
+  { name: "Контакты", href: "/contact", current: false },
 ];
 
 const Navbar = () => {
-  return (
-    <Disclosure as="nav" className="bg-transparent">
-      {({ open }) => (
-        <>
-          <div className="mx-auto px-4 z-10 absolute w-full">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-end justify-center sm:items-end sm:justify-between">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="/logo.svg"
-                    alt="Logo"
-                  />
-                  <img
-                    className="hidden h-12 w-auto lg:block"
-                    src="/logo_group.svg"
-                    alt="Logo"
-                  />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-[#757575] hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-[16px] leading-5 font-medium font-[Arsenal]"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  let [isMenu, setIsMenu] = useState(false);
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+  return (
+    <>
+      <div className="px-4 z-10 absolute w-full">
+        <div className="flex justify-between items-end">
+          <div className="relative w-[253px] h-[50px] cursor-pointer hidden lg:block">
+            <Image src="/logo_group.svg" alt="Logo" fill />
+          </div>
+          <div className="relative w-[153px] h-[30px] cursor-pointer hidden lg:hidden sm:block">
+            <Image src="/logo_group.svg" alt="Logo" fill />
+          </div>
+          <div className="relative w-[97px] h-[19px] cursor-pointer block sm:hidden">
+            <Image src="/logo_group.svg" alt="Logo" fill />
+          </div>
+          <div className="lg:flex space-x-4 hidden">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={classNames(
+                  item.current
+                    ? "bg-gray-900 text-white"
+                    : "text-[#757575] hover:bg-gray-700 hover:text-white",
+                  "px-3 py-2 rounded-md text-[16px] leading-5 font-medium font-[Arsenal]"
+                )}
+                aria-current={item.current ? "page" : undefined}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <button
+            className="w-6 h-4 sm:w-8 sm:h-8 lg:hidden"
+            onClick={() => setIsMenu(!isMenu)}
+          >
+            {isMenu ? <XMarkIcon /> : <Bars3Icon />}
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

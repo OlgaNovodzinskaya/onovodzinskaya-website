@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Me from "./components/Me";
 import Review from "./components/Review";
 import Services from "./components/Services";
+import Carousel from "@web/components/Carousel/Carousel";
 
 const cn = classNames.bind(styles);
 
@@ -31,11 +32,11 @@ const Home: NextPage<Props> = ({ fallback }) => {
             <Header />
           </div>
         </div>
-        <div className="py-[100px] bg-gradient-to-b from-[#FFF5F3] to-[#fff5f3]">
-          <h2 className="font-[Lobster] font-normal text-[40px] leading-[66.66%] text-[#ff9383] text-center mb-8">
+        <div className="py-[50px] sm:py-[100px] bg-gradient-to-b from-[#FFF5F3] to-[#fff5f3]">
+          <h2 className="font-[Lobster] font-normal text-[24px] leading-[82%] md:text-[40px] md:leading-[66.66%] text-[#ff9383] text-center mb-5 md:mb-8">
             Объекты
           </h2>
-          {/* <Carousel /> */}
+          <Carousel />
           <Services />
         </div>
         <Me />

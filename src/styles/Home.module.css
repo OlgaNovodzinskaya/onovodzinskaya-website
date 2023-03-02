@@ -1,8 +1,11 @@
 .container {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .object_card {
+  max-width: 237px;
   width: 100%;
   margin: 0 auto;
   height: 316px;
@@ -23,25 +26,15 @@
   padding: 10px;
   border-radius: 10px;
   transition: all 0.5s ease-in-out;
+  transform: translateY(235px);
 }
 
 .object_card:hover {
   border: 3px solid #aea2a9;
 }
 
-.object_card:hover button {
-  display: none;
-}
-
 .object_card:hover .object_content {
-  transform: translateY(235px);
+  transform: translateY(0);
   transition: all 0.5s ease-in-out;
   border-radius: 0;
-}
-
-@media only screen and (min-width: 1280px) {
-  .container {
-    max-width: 1500px;
-    margin: 0 auto;
-  }
 }

@@ -6,16 +6,16 @@
 
 .dot {
   border: none;
-  width: 60px;
-  height: 10px;
-  background: #c5c5c5;
-  border-radius: 12px;
+  width: 116px;
+  height: 14px;
+  background: #ffb8ad;
+  border-radius: 7px;
   margin: 0 5px;
   padding: 5px;
   cursor: pointer;
 
   &--active {
-    background: #000;
+    background: #ff8d7d;
   }
 
   &:focus {

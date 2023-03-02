@@ -1,5 +1,5 @@
 import React from "react";
-import ObjectCard from "@web/components/Objects/ObjectCard";
+import FacilityCard from "@web/components/Facility/FacilityCard";
 import Carousel from "@web/components/Carousel/Carousel";
 import object from "@web/utils/objects";
 
@@ -14,7 +14,7 @@ const Objects = () => {
           <Carousel perView={5}>
             {object.map((item, index) => (
               <div key={index} className={`keen-slider__slide`}>
-                <ObjectCard />
+                <FacilityCard />
               </div>
             ))}
           </Carousel>

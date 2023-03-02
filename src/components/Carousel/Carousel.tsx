@@ -4,8 +4,9 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
 import useSWR from "swr";
-import ObjectCard from "../Objects/ObjectCard";
+import ObjectCard from "../Facility/FacilityCard";
 import styles from "./Carousel.module.scss";
+import Image from "next/image";
 
 const cn = classNames.bind(styles);
 
@@ -19,20 +20,19 @@ export default function Carousel() {
       spacing: 15,
     },
     breakpoints: {
-      "(min-width: 768px)": {
+      "(min-width: 600px)": {
         slides: {
           perView: 2,
-          spacing: 15,
+          spacing: 0,
         },
       },
-      "(min-width: 1024px)": {
+      "(min-width: 768px)": {
         slides: {
           perView: 3,
           spacing: 15,
         },
       },
-
-      "(min-width: 1280px)": {
+      "(min-width: 1200px)": {
         slides: {
           perView: 4,
           spacing: 15,
@@ -52,13 +52,42 @@ export default function Carousel() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="container">
-      {/* <div ref={ref} className={cn("keen-slider slider_container")}>
-        {data?.map((item) => {
-          return <ObjectCard key={item.id} {...item} />;
-        })}
-      </div> */}
-
+    <>
+      <div className="container relative flex items-center">
+        <div ref={ref} className={cn("keen-slider slider_container")}>
+          {data?.map((item) => {
+            return <ObjectCard key={item.id} {...item} />;
+          })}
+        </div>
+        {instanceRef && (
+          <div className="carousel-navigation">
+            <button
+              onClick={() => instanceRef.current?.prev()}
+              className="arrow arrow-left absolute -left-5"
+            >
+              <Image
+                src="/images/left.svg"
+                alt="Picture of the author"
+                width={18}
+                height={57}
+                className="object-contain"
+              />
+            </button>
+            <button
+              onClick={() => instanceRef.current?.next()}
+              className="arrow arrow-right absolute -right-5"
+            >
+              <Image
+                src="/images/right.svg"
+                alt="Picture of the author"
+                width={18}
+                height={57}
+                className="object-contain"
+              />
+            </button>
+          </div>
+        )}
+      </div>
       <div className="mt-4">
         {loaded && instanceRef.current && (
           <div className={cn("dots")}>
@@ -78,6 +107,6 @@ export default function Carousel() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
