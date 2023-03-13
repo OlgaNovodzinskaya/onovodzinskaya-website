@@ -33,9 +33,7 @@ const Home: NextPage<Props> = ({ fallback }) => {
           </div>
         </div>
         <div className="py-[50px] sm:py-[100px] bg-gradient-to-b from-[#FFF5F3] to-[#fff5f3]">
-          <h2 className="font-[Lobster] font-normal text-[24px] leading-[82%] md:text-[40px] md:leading-[66.66%] text-[#ff9383] text-center mb-5 md:mb-8">
-            Объекты
-          </h2>
+          <h2 className="section-title mb-5 md:mb-8">Объекты</h2>
           <Carousel />
           <Services />
         </div>

@@ -4,9 +4,10 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useState } from "react";
 import useSWR from "swr";
-import ObjectCard from "../Facility/FacilityCard";
+import FacilityCard from "../Facility/FacilityCard";
 import styles from "./Carousel.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const cn = classNames.bind(styles);
 
@@ -51,13 +52,17 @@ export default function Carousel() {
 
   if (isLoading) return <div>Loading...</div>;
 
+  console.log(data);
+
   return (
     <>
       <div className="container relative flex items-center">
         <div ref={ref} className={cn("keen-slider slider_container")}>
-          {data?.map((item) => {
-            return <ObjectCard key={item.id} {...item} />;
-          })}
+          {data?.map((item, index) => (
+            <Link href={`/estate/${item.id}`} key={index}>
+              <FacilityCard city={""} images={""} {...item} />
+            </Link>
+          ))}
         </div>
         {instanceRef && (
           <div className="carousel-navigation">

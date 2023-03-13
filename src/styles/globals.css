@@ -2,7 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .section-title {
+    @apply text-2xl leading-[66%] font-normal text-center text-orange font-[Lobster];
+  }
+
+  .section-subheading {
+    @apply text-xl leading-9 font-bold text-center text-gray font-[Arsenal];
+  }
+
+  @screen sm {
+    .section-title {
+      @apply text-4xl;
+    }
+
+    .section-subheading {
+      @apply text-[28px] leading-[35px];
+    }
+  }
+
+  @screen md {
+    .section-title {
+      @apply text-[2.5rem];
+    }
+  }
+}
+
 .container {
+  position: relative;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;

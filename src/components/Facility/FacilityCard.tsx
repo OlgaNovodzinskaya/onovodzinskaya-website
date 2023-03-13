@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import Image from "next/image";
 import styles from "@web/styles/Home.module.css";
 import classNames from "classnames/bind";
@@ -8,10 +8,11 @@ const cn = classNames.bind(styles);
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
 type Props = {
+  key?: number;
   city: string;
   images: string;
 };
-const FacilityCard: FC<Props> = ({ city, images }) => {
+const FacilityCard: React.FC<Props> = ({ city, images }) => {
   const imageList = images.split(",");
 
   return (
